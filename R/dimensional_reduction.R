@@ -522,7 +522,7 @@ RunCCA.default <- function(
   }
   mat3 <- crossprod(x = object1, y = object2)
   cca.svd <- irlba(A = mat3, nv = num.cc)
-  cca.data <- rbind(cca.svd$u, cca.svd$v)
+  cca.data <- rbind(cca.svd$u*sqrt(cca.svd$d), cca.svd$v*sqrt(cca.svd$d))
   colnames(x = cca.data) <- paste0("CC", 1:num.cc)
   rownames(cca.data) <- c(cells1, cells2)
   cca.data <- apply(
